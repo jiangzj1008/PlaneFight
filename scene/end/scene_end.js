@@ -1,4 +1,4 @@
-class SceneEnd extends GuaScene {
+class SceneEnd extends GeScene {
     constructor(game) {
         super(game)
         game.registerAction('r', function(){

@@ -1,5 +1,7 @@
-class GeImage extends GuaScene {
+class GeImage extends GeScene {
     constructor(game, name) {
+        super(game)
+        this.game = game
         this.texture = game.textureByName(name)
         this.x = 0
         this.y = 0

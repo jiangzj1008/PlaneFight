@@ -23,8 +23,12 @@ var enableDebugMode = function(game, enable) {
 
 var __main = function() {
     var images = {
-        enermy_1: 'img/enermy_1.png',
         player: 'img/player.png',
+        bullet: 'img/bullet.png',
+        background: 'img/bg.jpg',
+        enermy_1: 'img/enermy1.png',
+        enermy_2: 'img/enermy2.png',
+        enermy_3: 'img/enermy3.png',
     }
 
     var game = GeGame.instance(30, images, function(g) {

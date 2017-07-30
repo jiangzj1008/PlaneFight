@@ -1,118 +1,78 @@
-class Scene extends GuaScene {
+class Scene extends GeScene {
     constructor(game) {
         super(game)
-
-        this.bg = GeImage.new(game, 'player')
-        this.player.x = 100
-        this.player.y = 150
-        // game.registerAction('k', function(){
-        //     var s = Scene(game)
-        //     game.replaceScene(s)
-        // })
+        this.setup()
     }
-    draw() {
-        // draw labels
-        this.game.drawImage(this.player)
+    setup() {
+        this.setupBackground()
+        this.setupPlayer()
+        this.setupEnermy()
+    }
+    setupBackground() {
+        var game = this.game
+        var bg1 = Background.new(game, 0)
+        var bg2 = Background.new(game, -853)
+        this.addElement(bg1)
+        this.addElement(bg2)
+        this.bgs = [bg1, bg2]
+    }
+    setupPlayer() {
+        var game = this.game
+        this.player = Player.new(game)
+        this.addElement(this.player)
+        this.setupPlayerEvent()
+    }
+    setupPlayerEvent() {
+        var g = this.game
+        var p = this.player
+        g.registerAction('a', function(){
+            p.moveLeft()
+        })
+        g.registerAction('d', function(){
+            p.moveRight()
+        })
+        g.registerAction('w', function(){
+            p.moveUp()
+        })
+        g.registerAction('s', function(){
+            p.moveDown()
+        })
+        g.registerAction('j', function(){
+            p.fire()
+        })
+    }
+    setupEnermy() {
+        this.numOfEnermy_all = 5
+        this.numOfEnermy_1 = this.randomBetween(3, 4)
+        this.numOfEnermy_2 = this.randomBetween(0, 1)
+        this.numOfEnermy_3 = this.numOfEnermy_all - this.numOfEnermy_1 - this.numOfEnermy_2
+
+        this.addEnermies()
+    }
+    addEnermies() {
+        var es = []
+        for (var i = 0; i < this.numOfEnermy_1; i++) {
+            var e = Enermy.new(this.game, 'enermy_1')
+            es.push(e)
+            this.addElement(e)
+        }
+        for (var j = 0; j < this.numOfEnermy_2; j++) {
+            var e = Enermy.new(this.game, 'enermy_2')
+            es.push(e)
+            this.addElement(e)
+        }
+        for (var k = 0; k < this.numOfEnermy_3; k++) {
+            var e = Enermy.new(this.game, 'enermy_3')
+            es.push(e)
+            this.addElement(e)
+        }
+        this.enermies = es
+    }
+    update() {
+        this.player.update()
+        for (var i = 0; i < this.enermies.length; i++) {
+            var e = this.enermies[i]
+            e.update()
+        }
     }
 }
-
-// var Scene = function(game) {
-//     var s = {
-//         game: game,
-//     }
-//     // 初始化
-//     var paddle = Paddle(game)
-//     var ball = Ball(game)
-//
-//     var score = 0
-//
-//     var blocks = loadLevel(game, 1)
-//
-//     game.registerAction('a', function(){
-//         paddle.moveLeft()
-//     })
-//     game.registerAction('d', function(){
-//         paddle.moveRight()
-//     })
-//     game.registerAction('f', function(){
-//         ball.fire()
-//     })
-//
-//     s.draw = function() {
-//         // draw 背景
-//         game.context.fillStyle = "#554"
-//         game.context.fillRect(0, 0, 500, 400)
-//         // draw
-//         game.drawImage(paddle)
-//         game.drawImage(ball)
-//         // draw blocks
-//         for (var i = 0; i < blocks.length; i++) {
-//             var block = blocks[i]
-//             if (block.alive) {
-//                 game.drawImage(block)
-//             }
-//         }
-//         // draw labels
-//         game.context.fillText('分数: ' + score, 10, 290)
-//     }
-//     s.update = function() {
-//         if (window.paused) {
-//             return
-//         }
-//
-//         ball.move()
-//         // 判断游戏结束
-//         if (ball.y > paddle.y) {
-//             // 跳转到 游戏结束 的场景
-//             var end = new SceneEnd(game)
-//             game.replaceScene(end)
-//         }
-//         // 判断相撞
-//         if (paddle.collide(ball)) {
-//             // 这里应该调用一个 ball.反弹() 来实现
-//             ball.bounce()
-//         }
-//         // 判断 ball 和 blocks 相撞
-//         for (var i = 0; i < blocks.length; i++) {
-//             var block = blocks[i]
-//             if (block.collide(ball)) {
-//                 // log('block 相撞')
-//                 block.kill()
-//                 ball.bounce()
-//                 // 更新分数
-//                 score += 100
-//             }
-//         }
-//     }
-//
-//     // mouse event
-//     var enableDrag = false
-//     game.canvas.addEventListener('mousedown', function(event) {
-//         var x = event.offsetX
-//         var y = event.offsetY
-//         log(x, y, event)
-//         // 检查是否点中了 ball
-//         if (ball.hasPoint(x, y)) {
-//             // 设置拖拽状态
-//             enableDrag = true
-//         }
-//     })
-//     game.canvas.addEventListener('mousemove', function(event) {
-//         var x = event.offsetX
-//         var y = event.offsetY
-//         // log(x, y, 'move')
-//         if (enableDrag) {
-//             log(x, y, 'drag')
-//             ball.x = x
-//             ball.y = y
-//         }
-//     })
-//     game.canvas.addEventListener('mouseup', function(event) {
-//         var x = event.offsetX
-//         var y = event.offsetY
-//         log(x, y, 'up')
-//         enableDrag = false
-//     })
-//
-//     return s
-// }

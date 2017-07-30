@@ -62,14 +62,9 @@ class GeGame {
         }, 1000/window.fps)
     }
     textureByName(name) {
-        log('image by name', this.images)
+        // log('image by name', this.images)
         var img = this.images[name]
-        // var image = {
-        //     w: img.width,
-        //     h: img.height,
-        //     image: img,
-        // }
-        return image
+        return img
     }
     runWithScene(scene) {
         var g = this
@@ -101,9 +96,7 @@ class GeGame {
                 g.images[name] = img
                 // 所有图片都成功载入之后, 调用 run
                 loads.push(1)
-                log('load images', loads.length, names.length)
                 if (loads.length == names.length) {
-                    log('load images', g.images)
                     g.__start()
                 }
             }
