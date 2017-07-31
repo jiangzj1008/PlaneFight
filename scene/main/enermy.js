@@ -5,7 +5,7 @@ class Enermy extends GeImage {
     }
     setup() {
         this.x = this.randomBetween(0, (500 - this.w))
-        this.y = -this.h
+        this.y = this.randomBetween(1, 4) * -this.h
         this.speed = this.randomBetween(3, 6)
     }
     update() {

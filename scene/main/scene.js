@@ -42,10 +42,9 @@ class Scene extends GeScene {
         })
     }
     setupEnermy() {
-        this.numOfEnermy_all = 5
         this.numOfEnermy_1 = this.randomBetween(3, 4)
-        this.numOfEnermy_2 = this.randomBetween(0, 1)
-        this.numOfEnermy_3 = this.numOfEnermy_all - this.numOfEnermy_1 - this.numOfEnermy_2
+        this.numOfEnermy_2 = this.randomBetween(1, 2)
+        this.numOfEnermy_3 = 1
 
         this.addEnermies()
     }
@@ -67,12 +66,5 @@ class Scene extends GeScene {
             this.addElement(e)
         }
         this.enermies = es
-    }
-    update() {
-        this.player.update()
-        for (var i = 0; i < this.enermies.length; i++) {
-            var e = this.enermies[i]
-            e.update()
-        }
     }
 }

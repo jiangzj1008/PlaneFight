@@ -6,14 +6,12 @@ class Background extends GeImage {
     }
     setup() {
         this.y = this.startPoint
-        this.w = 500
         this.speed = 10
     }
-    update() {
-        this.y += this.speed
-        if (this.y > this.h) {
-            log('reset', this)
-            this.setup()
-        }
-    }
+    // update() {
+    //     this.y += this.speed
+    //     // if (this.y > this.h) {
+    //     //     this.y = this.startPoint
+    //     // }
+    // }
 }
