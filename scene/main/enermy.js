@@ -14,5 +14,8 @@ class Enermy extends GeImage {
         if (this.y > 800) {
             this.life = 0
         }
+        // if (this.life == 1) {
+        //     this.texture = this.game.textureByName('enermy_1_die')
+        // }
     }
 }

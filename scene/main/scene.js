@@ -49,8 +49,8 @@ class Scene extends GeScene {
         })
     }
     setupEnermy() {
-        this.numOfEnermy_1 = this.randomBetween(3, 4)
-        this.numOfEnermy_2 = this.randomBetween(1, 2)
+        this.numOfEnermy_1 = this.randomBetween(2, 3)
+        this.numOfEnermy_2 = this.randomBetween(0, 1)
         this.numOfEnermy_3 = this.randomBetween(0, 1)
 
         this.addEnermies()
@@ -93,10 +93,31 @@ class Scene extends GeScene {
                 var e = elements[j]
                 e.update()
             }
+
+            if (type == 'enermys') {
+                for (var k = 0; k < elements.length; k++) {
+                    var enermy = elements[k]
+                    for (var l = 0; l < this.elements.player.length; l++) {
+                        var player = this.elements.player[l]
+                        if (enermy.collide(player)) {
+                            enermy.life--
+                            player.life--
+                        }
+                    }
+                    for (var l = 0; l < this.elements.bullets.length; l++) {
+                        var bullet = this.elements.bullets[l]
+                        if (enermy.collide(bullet)) {
+                            enermy.life--
+                            bullet.life--
+                        }
+                    }
+                }
+            }
+
         }
         if (this.cooldown == 0) {
             this.cooldown = 100
-            this.addEnermies()
+            this.setupEnermy()
         }
         this.cooldown--
     }

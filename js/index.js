@@ -27,6 +27,7 @@ var __main = function() {
         bullet: 'img/bullet.png',
         background: 'img/bg.jpg',
         enermy_1: 'img/enermy1.png',
+        enermy_1_die: 'img/enermy1_die1.png',
         enermy_2: 'img/enermy2.png',
         enermy_3: 'img/enermy3.png',
     }
