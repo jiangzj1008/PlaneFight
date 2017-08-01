@@ -4,10 +4,12 @@ class Player extends GeImage {
         this.setup()
     }
     setup() {
+        this.life = 1
         this.bullets = []
         this.x = (500 - this.w) / 2
         this.y = 800 - this.h - 50
         this.speed = 15
+        this.cooldown = 1
     }
     move(x, y) {
         if (x < 0) {
@@ -36,20 +38,18 @@ class Player extends GeImage {
         this.move(this.x, (this.y + this.speed))
     }
     fire() {
-        var bs = []
-        var x = this.x + this.w/2
-        var y = this.y
-        var b = Bullet.new(this.game)
-        b.x = x
-        b.y = y
-        this.scene.addElement(b)
-        this.bullets.push(b)
+        if (this.cooldown == 1) {
+            var x = this.x + this.w/2
+            var y = this.y
+            var b = Bullet.new(this.game)
+            b.x = x
+            b.y = y
+            this.scene.addElement(b, 'bullets')
+            this.cooldown = 4
+        }
+        this.cooldown--
     }
     update() {
-        for (var i = 0; i < this.bullets.length; i++) {
-            var e = this.bullets[i]
-            e.update()
-        }
     }
 }
 

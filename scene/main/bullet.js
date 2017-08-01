@@ -5,8 +5,12 @@ class Bullet extends GeImage {
     }
     setup() {
         this.speed = 10
+        this.life = 1
     }
     update() {
         this.y -= this.speed
+        if (this.y < -this.h) {
+            this.life = 0
+        }
     }
 }

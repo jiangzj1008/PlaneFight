@@ -12,10 +12,4 @@ class GeImage extends GeScene {
         var i = new this(game, name)
         return i
     }
-    draw() {
-
-    }
-    update() {
-
-    }
 }
