@@ -22,15 +22,14 @@ class EnermyDie extends GeImage {
     }
 }
 
-
 class Enermy extends GeImage {
     constructor(game, enermy) {
         super(game, enermy)
-        this.name = enermy
-        this.setup()
+        this.setup(enermy)
     }
-    setup() {
+    setup(enermy) {
         this.life = 1
+        this.name = enermy
         this.x = this.randomBetween(0, (500 - this.w))
         this.y = this.randomBetween(1, 4) * -this.h
         this.speed = this.randomBetween(3, 6)
@@ -43,8 +42,41 @@ class Enermy extends GeImage {
     }
     update() {
         this.y += this.speed
-        if (this.y > 800 || this.life == 0) {
+        if (this.y > 800) {
             this.die()
         }
+    }
+}
+
+class Enermy_1 extends Enermy {
+    constructor(game) {
+        super(game, 'enermy_1')
+        this.setup()
+    }
+    setup() {
+        this.life = 1
+        this.speed = 4
+    }
+}
+
+class Enermy_2 extends Enermy {
+    constructor(game) {
+        super(game, 'enermy_2')
+        this.setup()
+    }
+    setup() {
+        this.life = 3
+        this.speed = 4
+    }
+}
+
+class Enermy_3 extends Enermy {
+    constructor(game) {
+        super(game, 'enermy_3')
+        this.setup()
+    }
+    setup() {
+        this.life = 6
+        this.speed = 2
     }
 }

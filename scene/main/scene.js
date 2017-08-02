@@ -58,8 +58,8 @@ class Scene extends GeScene {
     }
     addEnermies() {
         for (var i = 0; i < this.numOfEnermy_1; i++) {
-            var e = Enermy.new(this.game, 'enermy_1')
-            this.addElement(e, 'enermys')
+            // var e = Enermy_1.new(this.game)
+            // this.addElement(e, 'enermys')
         }
         for (var j = 0; j < this.numOfEnermy_2; j++) {
             var e = Enermy.new(this.game, 'enermy_2')
@@ -111,6 +111,9 @@ class Scene extends GeScene {
                             enermy.life--
                             bullet.life--
                         }
+                    }
+                    if (enermy.life == 0) {
+                        enermy.die()
                     }
                 }
             }
