@@ -9,6 +9,7 @@ class Scene extends GeScene {
             backgrounds: [],
             player: [],
             enermys: [],
+            dead: [],
             bullets: [],
         }
         this.setupBackground()

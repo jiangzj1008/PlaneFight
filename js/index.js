@@ -27,9 +27,17 @@ var __main = function() {
         bullet: 'img/bullet.png',
         background: 'img/bg.jpg',
         enermy_1: 'img/enermy1.png',
-        enermy_1_die: 'img/enermy1_die1.png',
+        enermy_1_die1: 'img/enermy1_die1.png',
+        enermy_1_die2: 'img/enermy1_die2.png',
+        enermy_1_die3: 'img/enermy1_die3.png',
         enermy_2: 'img/enermy2.png',
+        enermy_2_die1: 'img/enermy2_die1.png',
+        enermy_2_die2: 'img/enermy2_die2.png',
+        enermy_2_die3: 'img/enermy2_die3.png',
         enermy_3: 'img/enermy3.png',
+        enermy_3_die1: 'img/enermy3_die1.png',
+        enermy_3_die2: 'img/enermy3_die2.png',
+        enermy_3_die3: 'img/enermy3_die3.png',
     }
 
     var game = GeGame.instance(30, images, function(g) {
