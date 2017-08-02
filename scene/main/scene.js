@@ -58,15 +58,15 @@ class Scene extends GeScene {
     }
     addEnermies() {
         for (var i = 0; i < this.numOfEnermy_1; i++) {
-            // var e = Enermy_1.new(this.game)
-            // this.addElement(e, 'enermys')
+            var e = Enermy_1.new(this.game)
+            this.addElement(e, 'enermys')
         }
         for (var j = 0; j < this.numOfEnermy_2; j++) {
-            var e = Enermy.new(this.game, 'enermy_2')
+            var e = Enermy_2.new(this.game)
             this.addElement(e, 'enermys')
         }
         for (var k = 0; k < this.numOfEnermy_3; k++) {
-            var e = Enermy.new(this.game, 'enermy_3')
+            var e = Enermy_3.new(this.game)
             this.addElement(e, 'enermys')
         }
     }

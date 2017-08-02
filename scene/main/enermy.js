@@ -8,16 +8,22 @@ class EnermyDie extends GeImage {
         this.life = 1
         this.changeCount = 1
         this.changeTimes = 3
-        var name = this.name + '_die'
+        this.cooldown = 3
+        var name = this.name + '_die1'
         this.texture = this.game.textureByName(name)
     }
     update() {
-        if (this.changeCount < this.changeTimes) {
-            this.changeCount++
-            var name = this.name + '_die' + this.changeCount
-            this.texture = this.game.textureByName(name)
+        if (this.cooldown > 0) {
+            this.cooldown--
         } else {
-            this.life = 0
+            if (this.changeCount < this.changeTimes) {
+                var name = this.name + '_die' + (this.changeCount + 1)
+                this.texture = this.game.textureByName(name)
+                this.changeCount++
+                this.cooldown = 3
+            } else {
+                this.life = 0
+            }
         }
     }
 }
@@ -25,14 +31,8 @@ class EnermyDie extends GeImage {
 class Enermy extends GeImage {
     constructor(game, enermy) {
         super(game, enermy)
-        this.setup(enermy)
-    }
-    setup(enermy) {
-        this.life = 1
-        this.name = enermy
         this.x = this.randomBetween(0, (500 - this.w))
         this.y = this.randomBetween(1, 4) * -this.h
-        this.speed = this.randomBetween(3, 6)
     }
     die() {
         var d = EnermyDie.new(this.game, this.name)
@@ -54,6 +54,7 @@ class Enermy_1 extends Enermy {
         this.setup()
     }
     setup() {
+        this.name = 'enermy_1'
         this.life = 1
         this.speed = 4
     }
@@ -65,6 +66,7 @@ class Enermy_2 extends Enermy {
         this.setup()
     }
     setup() {
+        this.name = 'enermy_2'
         this.life = 3
         this.speed = 4
     }
@@ -76,6 +78,7 @@ class Enermy_3 extends Enermy {
         this.setup()
     }
     setup() {
+        this.name = 'enermy_3'
         this.life = 6
         this.speed = 2
     }
