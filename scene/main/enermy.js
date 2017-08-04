@@ -55,6 +55,7 @@ class Enermy_1 extends Enermy {
     }
     setup() {
         this.name = 'enermy_1'
+        this.score = 10
         this.life = 1
         this.speed = 4
     }
@@ -67,7 +68,8 @@ class Enermy_2 extends Enermy {
     }
     setup() {
         this.name = 'enermy_2'
-        this.life = 3
+        this.score = 30
+        this.life = 10
         this.speed = 4
     }
 }
@@ -79,7 +81,8 @@ class Enermy_3 extends Enermy {
     }
     setup() {
         this.name = 'enermy_3'
-        this.life = 6
+        this.score = 100
+        this.life = 40
         this.speed = 2
     }
 }

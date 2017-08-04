@@ -7,7 +7,6 @@ class SceneTitle extends GeScene {
         })
     }
     draw() {
-        // draw labels
         this.game.context.fillText('按 k 开始游戏', 100, 190)
     }
 }

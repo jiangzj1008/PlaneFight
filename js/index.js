@@ -24,6 +24,10 @@ var enableDebugMode = function(game, enable) {
 var __main = function() {
     var images = {
         player: 'img/player.png',
+        player_die1: 'img/player_die1.png',
+        player_die2: 'img/player_die2.png',
+        player_die3: 'img/player_die3.png',
+        player_die4: 'img/player_die4.png',
         bullet: 'img/bullet.png',
         background: 'img/bg.jpg',
         enermy_1: 'img/enermy1.png',

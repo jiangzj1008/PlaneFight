@@ -4,6 +4,7 @@ class Scene extends GeScene {
         this.setup()
     }
     setup() {
+        this.score = 0
         this.cooldown = 150
         this.elements = {
             backgrounds: [],
@@ -84,6 +85,8 @@ class Scene extends GeScene {
                 }
             }
         }
+        var text = '得分：' + this.score
+        this.game.drawText(text, 0, 25)
     }
     update() {
         var types = Object.keys(this.elements)
@@ -103,6 +106,9 @@ class Scene extends GeScene {
                         if (enermy.collide(player)) {
                             enermy.life--
                             player.life--
+                            if (player.life == 0) {
+                                player.die()
+                            }
                         }
                     }
                     for (var l = 0; l < this.elements.bullets.length; l++) {
@@ -113,6 +119,7 @@ class Scene extends GeScene {
                         }
                     }
                     if (enermy.life == 0) {
+                        this.score += enermy.score
                         enermy.die()
                     }
                 }

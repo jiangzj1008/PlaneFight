@@ -1,3 +1,33 @@
+class PlayerDie extends GeImage {
+    constructor(game) {
+        super(game, 'player')
+        this.name = 'player_die'
+        this.setup()
+    }
+    setup() {
+        this.life = 1
+        this.changeCount = 1
+        this.changeTimes = 4
+        this.cooldown = 3
+        var name = this.name + this.changeCount
+        this.texture = this.game.textureByName(name)
+    }
+    update() {
+        if (this.cooldown > 0) {
+            this.cooldown--
+        } else {
+            if (this.changeCount < this.changeTimes) {
+                var name = this.name + (this.changeCount + 1)
+                this.texture = this.game.textureByName(name)
+                this.changeCount++
+                this.cooldown = 3
+            } else {
+                this.life = 0
+            }
+        }
+    }
+}
+
 class Player extends GeImage {
     constructor(game) {
         super(game, 'player')
@@ -49,24 +79,12 @@ class Player extends GeImage {
         }
         this.cooldown--
     }
+    die() {
+        var d = PlayerDie.new(this.game)
+        d.x = this.x
+        d.y = this.y
+        this.scene.addElement(d, 'dead')
+    }
     update() {
     }
 }
-
-
-// var Player = function(game) {
-//     var aInb = function(x, x1, x2) {
-//         return x >= x1 && x <= x2
-//     }
-//     o.collide = function(ball) {
-//         var a = o
-//         var b = ball
-//         if (aInb(a.x, b.x, b.x + b.w) || aInb(b.x, a.x, a.x + a.w)) {
-//             if (aInb(a.y, b.y, b.y + b.h) || aInb(b.y, a.y, a.y + a.h)) {
-//                 return true
-//             }
-//         }
-//         return false
-//     }
-//     return o
-// }

@@ -23,6 +23,10 @@ class GeGame {
         this.i = this.i || new this(...args)
         return this.i
     }
+    drawText(text, x, y) {
+        this.context.font = "24px serif";
+        this.context.fillText(text, x, y)
+    }
     drawImage(img) {
         this.context.drawImage(img.texture, img.x, img.y)
     }
