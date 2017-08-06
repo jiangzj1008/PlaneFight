@@ -83,6 +83,6 @@ class Enermy_3 extends Enermy {
         this.name = 'enermy_3'
         this.score = 100
         this.life = 40
-        this.speed = 2
+        this.speed = 3
     }
 }

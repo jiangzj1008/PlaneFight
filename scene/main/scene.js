@@ -19,11 +19,11 @@ class Scene extends GeScene {
     }
     setupBackground() {
         var game = this.game
-        var bg1 = Background.new(game, 0)
-        var bg2 = Background.new(game, -853)
-        this.addElement(bg1, 'backgrounds')
-        this.addElement(bg2, 'backgrounds')
-        this.bgs = [bg1, bg2]
+        for (var i = 0; i < 2; i++) {
+            var bg = Background.new(game)
+            bg.y = -853 * i
+            this.addElement(bg, 'backgrounds')
+        }
     }
     setupPlayer() {
         var game = this.game

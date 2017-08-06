@@ -1,19 +1,19 @@
 class Background extends GeImage {
-    constructor(game, startPoint) {
+    constructor(game) {
         super(game, 'background')
-        this.startPoint = startPoint
         this.setup()
     }
     setup() {
-        this.y = this.startPoint
-        this.speed = 10
+        this.speed = 2
         this.life = 1
+        this.skipCount = 425
     }
     update() {
-        // this.y += this.speed
-        // console.log(this.startPoint, this.y);
-        // if (this.y > 853) {
-        //     this.setup()
-        // }
+        this.skipCount--
+        if (this.skipCount == 0) {
+            this.y -= 850
+            this.skipCount = 425
+        }
+        this.y += this.speed
     }
 }
