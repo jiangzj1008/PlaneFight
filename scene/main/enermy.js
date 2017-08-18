@@ -33,6 +33,7 @@ class Enermy extends GeImage {
         super(game, enermy)
         this.x = this.randomBetween(0, (500 - this.w))
         this.y = this.randomBetween(1, 4) * -this.h
+        this.cooldown = 1
     }
     die() {
         var d = EnermyDie.new(this.game, this.name)
@@ -40,8 +41,22 @@ class Enermy extends GeImage {
         d.y = this.y
         this.scene.addElement(d, 'dead')
     }
+    fire() {
+        if (this.cooldown == 1) {
+            var x = this.x + this.w/2
+            var y = this.y + this.h
+            var b = Bullet.new(this.game)
+            b.x = x
+            b.y = y
+            b.speed = -5
+            this.scene.addElement(b, 'bullets_enermy')
+            this.cooldown = 80
+        }
+        this.cooldown--
+    }
     update() {
         this.y += this.speed
+        this.fire()
         if (this.y > 800) {
             this.die()
         }

@@ -12,6 +12,7 @@ class Scene extends GeScene {
             enermys: [],
             dead: [],
             bullets: [],
+            bullets_enermy: [],
         }
         this.setupBackground()
         this.setupPlayer()
@@ -71,6 +72,56 @@ class Scene extends GeScene {
             this.addElement(e, 'enermys')
         }
     }
+    detect() {
+        var enermys = this.elements.enermys
+        var player = this.player
+        var bullets = this.elements.bullets
+        var bullets_enermy = this.elements.bullets_enermy
+        // 检测敌机
+        for (var i = 0; i < enermys.length; i++) {
+            var enermy = enermys[i]
+            if (enermy.collide(player)) {
+                enermy.life--
+                player.life--
+                if (player.life == 0) {
+                    player.die()
+                }
+            }
+            for (var j = 0; j < bullets.length; j++) {
+                var bullet = bullets[j]
+                if (enermy.collide(bullet)) {
+                    enermy.life--
+                    bullet.life--
+                }
+            }
+            if (enermy.life == 0) {
+                this.score += enermy.score
+                enermy.die()
+            }
+        }
+        // 检测玩家
+        for (var k = 0; k < bullets_enermy.length; k++) {
+            var b = bullets_enermy[k]
+            if (player.collide(b)) {
+                b.life--
+                player.life--
+                if (player.life == 0) {
+                    player.die()
+                }
+            }
+        }
+        // 检测子弹与子弹
+        for (var i = 0; i < bullets.length; i++) {
+            var b1 = bullets[i]
+            for (var j = 0; j < bullets_enermy.length; j++) {
+                var b2 = bullets_enermy[j]
+                if (b1.collide(b2)) {
+                    b1.life--
+                    b2.life--
+                }
+            }
+        }
+    }
     draw() {
         var types = Object.keys(this.elements)
         for (var i = 0; i < types.length; i++) {
@@ -89,6 +140,9 @@ class Scene extends GeScene {
         this.game.drawText(text, 0, 25)
     }
     update() {
+        if (window.paused) {
+            return
+        }
         var types = Object.keys(this.elements)
         for (var i = 0; i < types.length; i++) {
             var type = types[i]
@@ -97,35 +151,8 @@ class Scene extends GeScene {
                 var e = elements[j]
                 e.update()
             }
-
-            if (type == 'enermys') {
-                for (var k = 0; k < elements.length; k++) {
-                    var enermy = elements[k]
-                    for (var l = 0; l < this.elements.player.length; l++) {
-                        var player = this.elements.player[l]
-                        if (enermy.collide(player)) {
-                            enermy.life--
-                            player.life--
-                            if (player.life == 0) {
-                                player.die()
-                            }
-                        }
-                    }
-                    for (var l = 0; l < this.elements.bullets.length; l++) {
-                        var bullet = this.elements.bullets[l]
-                        if (enermy.collide(bullet)) {
-                            enermy.life--
-                            bullet.life--
-                        }
-                    }
-                    if (enermy.life == 0) {
-                        this.score += enermy.score
-                        enermy.die()
-                    }
-                }
-            }
-
         }
+        this.detect()
         if (this.cooldown == 0) {
             this.cooldown = 100
             this.setupEnermy()
