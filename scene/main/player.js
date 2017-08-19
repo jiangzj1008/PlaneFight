@@ -74,6 +74,7 @@ class Player extends GeImage {
             var b = Bullet.new(this.game)
             b.x = x
             b.y = y
+            b.player = this
             this.scene.addElement(b, 'bullets')
             this.cooldown = 4
         }

@@ -45,10 +45,9 @@ class Enermy extends GeImage {
         if (this.cooldown == 1) {
             var x = this.x + this.w/2
             var y = this.y + this.h
-            var b = Bullet.new(this.game)
+            var b = Bullet2.new(this.game)
             b.x = x
             b.y = y
-            b.speed = -5
             this.scene.addElement(b, 'bullets_enermy')
             this.cooldown = 80
         }
