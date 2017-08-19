@@ -24,8 +24,8 @@ var __main = function() {
         player_die2: 'img/player_die2.png',
         player_die3: 'img/player_die3.png',
         player_die4: 'img/player_die4.png',
-        prop1: 'img/prop1.png'
-        prop2: 'img/prop2.png'
+        prop1: 'img/prop1.png',
+        prop2: 'img/prop2.png',
         bullet: 'img/bullet.png',
         bullet2: 'img/bullet2.png',
         bullet3: 'img/bullet3.png',

@@ -6,6 +6,9 @@ class Scene extends GeScene {
     setup() {
         this.score = 0
         this.cooldown = 150
+        this.gunRewardScore = 123
+        this.bombRewardScore = 356
+        this.gun = false
         this.elements = {
             backgrounds: [],
             player: [],
@@ -13,6 +16,8 @@ class Scene extends GeScene {
             dead: [],
             bullets: [],
             bullets_enermy: [],
+            prop_gun: [],
+            prop_bomb: [],
         }
         this.setupBackground()
         this.setupPlayer()
@@ -35,6 +40,7 @@ class Scene extends GeScene {
     setupPlayerEvent() {
         var g = this.game
         var p = this.player
+        var self = this
         g.registerAction('a', function(){
             p.moveLeft()
         })
@@ -48,7 +54,7 @@ class Scene extends GeScene {
             p.moveDown()
         })
         g.registerAction('j', function(){
-            p.fire()
+            p.fire(self.gun)
         })
     }
     setupEnermy() {
@@ -72,11 +78,29 @@ class Scene extends GeScene {
             this.addElement(e, 'enermys')
         }
     }
+    addProps() {
+        if (this.score > this.gunRewardScore && !this.gun) {
+            var e = Prop_gun.new(this.game)
+            e.x = this.randomBetween(100, 400)
+            e.y = this.randomBetween(-100, -50)
+            this.addElement(e, 'prop_gun')
+            this.gunRewardScore += 123
+        }
+        if (this.score > this.bombRewardScore) {
+            var e = Prop_bomb.new(this.game)
+            e.x = this.randomBetween(100, 400)
+            e.y = this.randomBetween(-100, -50)
+            this.addElement(e, 'prop_bomb')
+            this.bombRewardScore += 356
+        }
+    }
     detect() {
         var enermys = this.elements.enermys
         var player = this.player
         var bullets = this.elements.bullets
         var bullets_enermy = this.elements.bullets_enermy
+        var prop_gun = this.elements.prop_gun
+        var prop_bomb = this.elements.prop_bomb
         // 检测敌机
         for (var i = 0; i < enermys.length; i++) {
             var enermy = enermys[i]
@@ -103,6 +127,7 @@ class Scene extends GeScene {
         for (var k = 0; k < bullets_enermy.length; k++) {
             var b = bullets_enermy[k]
             if (player.collide(b)) {
+                this.gun = false
                 b.life--
                 player.life--
                 if (player.life == 0) {
@@ -119,6 +144,15 @@ class Scene extends GeScene {
                     b1.life--
                     b2.life--
                 }
+            }
+        }
+        // 检测道具
+        for (var i = 0; i < prop_gun.length; i++) {
+            var prop = prop_gun[i]
+            if (player.collide(prop)) {
+                this.gun = true
+                prop.life--
+                this.player.life++
             }
         }
     }
@@ -158,5 +192,6 @@ class Scene extends GeScene {
             this.setupEnermy()
         }
         this.cooldown--
+        this.addProps()
     }
 }

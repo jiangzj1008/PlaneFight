@@ -67,18 +67,41 @@ class Player extends GeImage {
     moveDown() {
         this.move(this.x, (this.y + this.speed))
     }
-    fire() {
+    addBullet() {
         if (this.cooldown == 1) {
             var x = this.x + this.w/2
             var y = this.y
             var b = Bullet.new(this.game)
             b.x = x
             b.y = y
-            b.player = this
             this.scene.addElement(b, 'bullets')
             this.cooldown = 4
         }
         this.cooldown--
+    }
+    addBullet_2() {
+        if (this.cooldown == 1) {
+            var x1 = this.x + 10
+            var x2 = this.x + this.w - 20
+            var y = this.y
+            var b1 = Bullet.new(this.game)
+            var b2 = Bullet.new(this.game)
+            b1.x = x1
+            b2.x = x2
+            b1.y = y
+            b2.y = y
+            this.scene.addElement(b1, 'bullets')
+            this.scene.addElement(b2, 'bullets')
+            this.cooldown = 4
+        }
+        this.cooldown--
+    }
+    fire(status) {
+        if (status) {
+            this.addBullet_2()
+        } else {
+            this.addBullet()
+        }
     }
     die() {
         var d = PlayerDie.new(this.game)

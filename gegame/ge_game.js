@@ -43,7 +43,6 @@ class GeGame {
         this.actions[key] = callback
     }
     runloop() {
-        log(window.fps)
         // events
         var actions = Object.keys(this.actions)
         for (var i = 0; i < actions.length; i++) {
