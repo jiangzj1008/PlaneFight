@@ -55,16 +55,28 @@ class Player extends GeImage {
         this.x = x
         this.y = y
     }
-    moveLeft() {
+    moveLeft(keyStatus) {
+        if (keyStatus == 'up') {
+            return
+        }
         this.move((this.x - this.speed), this.y)
     }
-    moveRight() {
+    moveRight(keyStatus) {
+        if (keyStatus == 'up') {
+            return
+        }
         this.move((this.x + this.speed), this.y)
     }
-    moveUp() {
+    moveUp(keyStatus) {
+        if (keyStatus == 'up') {
+            return
+        }
         this.move(this.x, (this.y - this.speed))
     }
-    moveDown() {
+    moveDown(keyStatus) {
+        if (keyStatus == 'up') {
+            return
+        }
         this.move(this.x, (this.y + this.speed))
     }
     addBullet() {
@@ -96,7 +108,10 @@ class Player extends GeImage {
         }
         this.cooldown--
     }
-    fire(status) {
+    fire(status, keyStatus) {
+        if (keyStatus == 'up') {
+            return
+        }
         if (status) {
             this.addBullet_2()
         } else {

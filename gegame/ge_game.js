@@ -12,10 +12,10 @@ class GeGame {
         // events
         var self = this
         window.addEventListener('keydown', event => {
-            this.keydowns[event.key] = true
+            this.keydowns[event.key] = 'down'
         })
         window.addEventListener('keyup', function(event){
-            self.keydowns[event.key] = false
+            self.keydowns[event.key] = 'up'
         })
         this.init()
     }
@@ -47,9 +47,12 @@ class GeGame {
         var actions = Object.keys(this.actions)
         for (var i = 0; i < actions.length; i++) {
             var key = actions[i]
-            if(this.keydowns[key]) {
-                // 如果按键被按下, 调用注册的 action
-                this.actions[key]()
+            var status = this.keydowns[key]
+            if(status == 'down') {
+                this.actions[key]('down')
+            } else if (status == 'up') {
+                this.actions[key]('up')
+                this.keydowns[key] = ''
             }
         }
         // update

@@ -17,6 +17,14 @@ var enableDebugMode = function(game, enable) {
     })
 }
 
+var inputPng = function(images, name, number) {
+    for (var i = 1; i <= number; i++) {
+        var key = name + i
+        var value = `img/${key}.png`
+        images[key] = value
+    }
+}
+
 var __main = function() {
     var images = {
         player: 'img/player.png',
@@ -28,7 +36,6 @@ var __main = function() {
         prop2: 'img/prop2.png',
         bullet: 'img/bullet.png',
         bullet2: 'img/bullet2.png',
-        bullet3: 'img/bullet3.png',
         background: 'img/bg.jpg',
         enermy_1: 'img/enermy1.png',
         enermy_1_die1: 'img/enermy1_die1.png',
@@ -42,10 +49,18 @@ var __main = function() {
         enermy_3_die1: 'img/enermy3_die1.png',
         enermy_3_die2: 'img/enermy3_die2.png',
         enermy_3_die3: 'img/enermy3_die3.png',
+        bomb: 'img/bomb.png',
+        gun: 'img/gun.png',
+        life: 'img/life.png',
+        logo: 'img/logo.png',
+        firework: 'img/firework.png',
     }
 
+    inputPng(images, 'loading', 3)
+
     var game = GeGame.instance(30, images, function(g) {
-        var s = Scene.new(g)
+        // var s = Scene.new(g)
+        var s = SceneTitle.new(g)
         g.runWithScene(s)
     })
 
