@@ -57,7 +57,6 @@ class Scene extends GeScene {
         this.numOfEnermy_1 = this.randomBetween(2, 3)
         this.numOfEnermy_2 = this.randomBetween(0, 1)
         this.numOfEnermy_3 = this.randomBetween(0, 1)
-
         this.addEnermies()
     }
     addEnermies() {
@@ -150,7 +149,6 @@ class Scene extends GeScene {
             if (enermy.life == 0) {
                 this.score += enermy.score
                 enermy.die()
-
                 var self = this
                 var x = enermy.x + enermy.w/2
                 var y = enermy.y + enermy.w/2
@@ -159,8 +157,6 @@ class Scene extends GeScene {
                     var f = fire.particles[i]
                     this.elements.fire.push(f)
                 }
-
-
             }
         }
         // 检测玩家
@@ -205,6 +201,13 @@ class Scene extends GeScene {
             }
         }
     }
+    updateEnermy() {
+        if (this.cooldown == 0) {
+            this.cooldown = 100
+            this.setupEnermy()
+        }
+        this.cooldown--
+    }
     drawProps() {
         if (this.bombNum > 0) {
             var img = this.game.images['bomb']
@@ -223,43 +226,19 @@ class Scene extends GeScene {
             this.game.drawText(text, 70, 780)
         }
     }
-    draw() {
-        var types = Object.keys(this.elements)
-        for (var i = 0; i < types.length; i++) {
-            var type = types[i]
-            var elements = this.elements[type]
-            for (var j = 0; j < elements.length; j++) {
-                var e = elements[j]
-                if (e.life > 0) {
-                    this.game.drawImage(e)
-                } else {
-                    elements.splice(j, 1)
-                }
-            }
-        }
+    drawScore() {
         var text = '得分：' + this.score
         this.game.drawText(text, 0, 25)
+    }
+    draw() {
+        super.draw()
         this.drawProps()
+        this.drawScore()
     }
     update() {
-        if (window.paused) {
-            return
-        }
-        var types = Object.keys(this.elements)
-        for (var i = 0; i < types.length; i++) {
-            var type = types[i]
-            var elements = this.elements[type]
-            for (var j = 0; j < elements.length; j++) {
-                var e = elements[j]
-                e.update()
-            }
-        }
+        super.update()
+        this.updateEnermy()
         this.detect()
-        if (this.cooldown == 0) {
-            this.cooldown = 100
-            this.setupEnermy()
-        }
-        this.cooldown--
         this.addProps()
     }
 }

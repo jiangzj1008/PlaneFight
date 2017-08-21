@@ -34,7 +34,7 @@ var __main = function() {
         player_die4: 'img/player_die4.png',
         prop1: 'img/prop1.png',
         prop2: 'img/prop2.png',
-        bullet: 'img/bullet.png',
+        bullet1: 'img/bullet1.png',
         bullet2: 'img/bullet2.png',
         background: 'img/bg.jpg',
         enermy_1: 'img/enermy1.png',

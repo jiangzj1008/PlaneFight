@@ -41,31 +41,7 @@ class SceneTitle extends GeScene {
         this.game.context.drawImage(img, x, y)
     }
     draw() {
-        var types = Object.keys(this.elements)
-        for (var i = 0; i < types.length; i++) {
-            var type = types[i]
-            var elements = this.elements[type]
-            for (var j = 0; j < elements.length; j++) {
-                var e = elements[j]
-                if (e.life > 0) {
-                    this.game.drawImage(e)
-                }
-            }
-        }
+        super.draw()
         this.drawTitle()
-    }
-    update() {
-        if (window.paused) {
-            return
-        }
-        var types = Object.keys(this.elements)
-        for (var i = 0; i < types.length; i++) {
-            var type = types[i]
-            var elements = this.elements[type]
-            for (var j = 0; j < elements.length; j++) {
-                var e = elements[j]
-                e.update()
-            }
-        }
     }
 }

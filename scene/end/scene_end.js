@@ -28,30 +28,8 @@ class SceneEnd extends GeScene {
         this.game.drawText(text, 200, 450)
     }
     draw() {
-        var types = Object.keys(this.elements)
-        for (var i = 0; i < types.length; i++) {
-            var type = types[i]
-            var elements = this.elements[type]
-            for (var j = 0; j < elements.length; j++) {
-                var e = elements[j]
-                this.game.drawImage(e)
-            }
-        }
+        super.draw()
         this.drawTitle()
         this.drawScore()
-    }
-    update() {
-        if (window.paused) {
-            return
-        }
-        var types = Object.keys(this.elements)
-        for (var i = 0; i < types.length; i++) {
-            var type = types[i]
-            var elements = this.elements[type]
-            for (var j = 0; j < elements.length; j++) {
-                var e = elements[j]
-                e.update()
-            }
-        }
     }
 }

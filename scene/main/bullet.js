@@ -1,6 +1,6 @@
 class Bullet extends GeImage {
-    constructor(game) {
-        super(game, 'bullet')
+    constructor(game, name) {
+        super(game, name)
         this.setup()
     }
     setup() {
@@ -14,6 +14,12 @@ class Bullet extends GeImage {
         }
     }
 }
+
+class Bullet1 extends Bullet {
+    constructor(game) {
+        super(game, 'bullet1')
+    }
+}
 class Bullet2 extends GeImage {
     constructor(game) {
         super(game, 'bullet2')
@@ -21,12 +27,5 @@ class Bullet2 extends GeImage {
     }
     setup() {
         this.speed = -5
-        this.life = 1
-    }
-    update() {
-        this.y -= this.speed
-        if (this.y < -this.h || this.y > 800) {
-            this.life = 0
-        }
     }
 }
