@@ -20,12 +20,13 @@ class Bullet1 extends Bullet {
         super(game, 'bullet1')
     }
 }
-class Bullet2 extends GeImage {
+class Bullet2 extends Bullet {
     constructor(game) {
         super(game, 'bullet2')
         this.setup()
     }
     setup() {
+        super.setup()
         this.speed = -5
     }
 }

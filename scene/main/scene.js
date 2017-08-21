@@ -122,13 +122,27 @@ class Scene extends GeScene {
         }, 1000)
     }
 
-    detect() {
+    detectPlayer() {
+        var player = this.player
+        var bullets_enermy = this.elements.bullets_enermy
+        // 检测玩家
+        for (var k = 0; k < bullets_enermy.length; k++) {
+            var b = bullets_enermy[k]
+            if (player.collide(b)) {
+                this.gun = false
+                b.life--
+                player.life--
+                if (player.life <= 0) {
+                    player.die()
+                    this.end()
+                }
+            }
+        }
+    }
+    detectEnermys() {
         var enermys = this.elements.enermys
         var player = this.player
         var bullets = this.elements.bullets
-        var bullets_enermy = this.elements.bullets_enermy
-        var prop_gun = this.elements.prop_gun
-        var prop_bomb = this.elements.prop_bomb
         // 检测敌机
         for (var i = 0; i < enermys.length; i++) {
             var enermy = enermys[i]
@@ -159,19 +173,10 @@ class Scene extends GeScene {
                 }
             }
         }
-        // 检测玩家
-        for (var k = 0; k < bullets_enermy.length; k++) {
-            var b = bullets_enermy[k]
-            if (player.collide(b)) {
-                this.gun = false
-                b.life--
-                player.life--
-                if (player.life <= 0) {
-                    player.die()
-                    this.end()
-                }
-            }
-        }
+    }
+    detectBullets() {
+        var bullets = this.elements.bullets
+        var bullets_enermy = this.elements.bullets_enermy
         // 检测子弹与子弹
         for (var i = 0; i < bullets.length; i++) {
             var b1 = bullets[i]
@@ -183,13 +188,18 @@ class Scene extends GeScene {
                 }
             }
         }
+    }
+    detectProps() {
+        var player = this.player
+        var prop_gun = this.elements.prop_gun
+        var prop_bomb = this.elements.prop_bomb
         // 检测道具1
         for (var i = 0; i < prop_gun.length; i++) {
             var prop = prop_gun[i]
             if (player.collide(prop)) {
                 this.gun = true
                 prop.life--
-                this.player.life++
+                player.life++
             }
         }
         // 检测道具2
@@ -229,6 +239,12 @@ class Scene extends GeScene {
     drawScore() {
         var text = '得分：' + this.score
         this.game.drawText(text, 0, 25)
+    }
+    detect() {
+        this.detectPlayer()
+        this.detectEnermys()
+        this.detectBullets()
+        this.detectProps()
     }
     draw() {
         super.draw()
