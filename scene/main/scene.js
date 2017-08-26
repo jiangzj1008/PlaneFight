@@ -114,12 +114,14 @@ class Scene extends GeScene {
     end() {
         var g = this.game
         var self = this
+        self.player.die()
+        self.elements.player = []
         var s = SceneEnd.new(g)
         s.elements.backgrounds = self.elements.backgrounds
         s.score = self.score
         setTimeout(function () {
             g.replaceScene(s)
-        }, 1000)
+        }, 500)
     }
 
     detectPlayer() {
@@ -133,7 +135,6 @@ class Scene extends GeScene {
                 b.life--
                 player.life--
                 if (player.life <= 0) {
-                    player.die()
                     this.end()
                 }
             }
@@ -149,8 +150,8 @@ class Scene extends GeScene {
             if (enermy.collide(player)) {
                 enermy.life--
                 player.life--
-                if (player.life == 0) {
-                    player.die()
+                if (player.life <= 0) {
+                    this.end()
                 }
             }
             for (var j = 0; j < bullets.length; j++) {

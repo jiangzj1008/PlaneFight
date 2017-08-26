@@ -42,6 +42,9 @@ class Player extends GeImage {
         this.cooldown = 1
     }
     move(x, y) {
+        if (this.life <= 0) {
+            return
+        }
         if (x < 0) {
             x = 0
         } else if (x > 500 - this.w) {
