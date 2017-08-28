@@ -101,8 +101,7 @@ class Scene extends GeScene {
         var bullets = this.elements.bullets_enermy
         for (var i = 0; i < enermys.length; i++) {
             var e = enermys[i]
-            this.score += e.score
-            e.life = 0
+            this.shootDown(e)
         }
         for (var i = 0; i < bullets.length; i++) {
             var b = bullets[i]
@@ -123,7 +122,19 @@ class Scene extends GeScene {
             g.replaceScene(s)
         }, 500)
     }
-
+    shootDown(enermy) {
+        enermy.life = 0
+        this.score += enermy.score
+        enermy.die()
+        var self = this
+        var x = enermy.x + enermy.w/2
+        var y = enermy.y + enermy.w/2
+        var fire = ParticleSystem.new(self.game, self, x, y)
+        for (var i = 0; i < fire.particles.length; i++) {
+            var f = fire.particles[i]
+            self.elements.fire.push(f)
+        }
+    }
     detectPlayer() {
         var player = this.player
         var bullets_enermy = this.elements.bullets_enermy
@@ -161,17 +172,8 @@ class Scene extends GeScene {
                     bullet.life--
                 }
             }
-            if (enermy.life == 0) {
-                this.score += enermy.score
-                enermy.die()
-                var self = this
-                var x = enermy.x + enermy.w/2
-                var y = enermy.y + enermy.w/2
-                var fire = ParticleSystem.new(this.game, self, x, y)
-                for (var i = 0; i < fire.particles.length; i++) {
-                    var f = fire.particles[i]
-                    this.elements.fire.push(f)
-                }
+            if (enermy.life <= 0) {
+                this.shootDown(enermy)
             }
         }
     }

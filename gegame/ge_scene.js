@@ -26,6 +26,7 @@ class GeScene {
                     this.game.drawImage(e)
                 } else {
                     elements.splice(j, 1)
+                    j--
                 }
             }
         }
